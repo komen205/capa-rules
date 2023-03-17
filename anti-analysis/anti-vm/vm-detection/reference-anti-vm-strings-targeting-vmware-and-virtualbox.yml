@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: reference anti-VM strings targeting VirtualBox and Vmware
+    namespace: anti-analysis/anti-vm/vm-detection
+    authors:
+      - komen205
+    scope: function
+    att&ck:
+      - Defense Evasion::Virtualization/Sandbox Evasion::System Checks [T1497.001]
+    mbc:
+      - Anti-Behavioral Analysis::Virtual Machine Detection [B0009]
+    references:
+      - https://github.com/Outbuilt/.NET-Anti-Debug/blob/master/Protection.cs
+    #examples:
+    #-
+  features:
+    - and:
+      - string: /(?i)SELECT\s+\*\s+FROM\s+Win32_ComputerSystem/
+      - string: "VIRTUAL"
+      - string: "vmware"
+      - string: "VirtualBox"
