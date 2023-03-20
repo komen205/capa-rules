@@ -5,11 +5,13 @@ rule:
     authors:
       - moritz.raabe@mandiant.com
       - joakim@intezer.com
+      - komen205
     scope: function
     att&ck:
       - Discovery::System Information Discovery [T1082]
     examples:
       - BFB9B5391A13D0AFD787E87AB90F14F5:0x13145B5A
+      - 4fed83a71dd33aecef5041667e43b32ec70d12a1a31c0a920937ff159c38c37e
   features:
     - or:
       - and:
@@ -24,3 +26,11 @@ rule:
         - os: linux
         - api: system
         - substring: "/proc/cpuinfo"
+      - and:
+        - format: dotnet
+        - string: /Win32_Processor/i
+        - or:
+          - string: /UniqueID/i 
+          - string: /ProcessorID/i 
+          - string: /Name/i
+          - string: /Manufacturer/i 
